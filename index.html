@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="landing-page">
+      <h1>Welcome to Tic Tac Toe!</h1>
+      <div class="select">
+        <h3>Select number of Matches</h3>
+        <div class="round">
+          <div class="round-box">4</div>
+          <div class="round-box round-select">8</div>
+          <div class="round-box">12</div>
+        </div>
+      </div>
+      <button class="play" onclick="startGame()">Play</button>
+    </div>
+    <div class="container">
+      <div class="player player-1">
+        <h1>Player 1</h1>
+        <div class="current1 current x"></div>
+        <div class="current-won">Won : <span class="won1">0</span></div>
+        <div class="current-draw" >Draw : <span class="draw1">0</span>
+          
+      </div>
+    </div>
+    <div class="board" id="board">
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+      <div class="cell" data-cell></div>
+    </div>
+    <div class="player player-2">
+      <h1>Player 2</h1>
+      <div class="current2 current o"></div>
+      <div class="current-won" >Won : <span class="won2">0</span></div>
+      <div class="current-draw" >Draw : <span class="draw2">0</span></div>
+    </div>
+    <div class="overlay">
+      <div class="overlay-text "></div>
+      <button class="next" onclick="nextRound()">Next Round😼</button>
+    </div>
+    <script src="/script.js"></script>
+  </body>
+</html>

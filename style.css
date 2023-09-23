@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Press Start 2P", cursive;
+  /* font-family: "Roboto", sans-serif; */
+}
+:root {
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * 0.9);
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+/* Landing PAge */
+.landing-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #183d3d;
+  gap: 2rem;
+}
+.landing-page h1,
+.round-box,
+button,
+h3 {
+  font-family: "Press Start 2P", cursive;
+}
+.landing-page h1 {
+  font-size: 2.5rem;
+  position: relative;
+  transition: 0.5s all ease-in-out;
+  overflow: hidden;
+}
+.landing-page h1::after {
+  content: "";
+  height: 3px;
+  position: absolute;
+  left: -50%;
+  bottom: 0;
+  width: 50%;
+  background-color: white;
+  transition: 0.3s all ease-in-out;
+}
+.landing-page h1:hover::after {
+  display: inline-block;
+  left: 0;
+}
+.landing-page h1::before {
+  content: "";
+  height: 3px;
+  position: absolute;
+  right: -50%;
+  bottom: 0;
+  width: 50%;
+  background-color: white;
+  transition: 0.3s all ease-in-out;
+}
+.landing-page h1:hover::before {
+  right: 0;
+}
+.landing-page h3 {
+  font-size: 1.4rem;
+}
+.round {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.round-box {
+  width: 31%;
+  border: 3px solid white;
+  padding: 15px;
+  text-align: center;
+}
+.round-box:hover {
+  background-color: #fff;
+  color: #183d3d;
+}
+.round-select {
+  background-color: #fff;
+  color: #183d3d;
+}
+
+.play {
+  padding: 10px 25px;
+  font-size: 2rem;
+}
+/* main container */
+.container {
+  display: flex;
+  display: none;
+  height: 100vh;
+  width: 100vw;
+}
+/* ---------------BOARD SETUP */
+.board {
+  height: 100%;
+  width: 50%;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+}
+.cell {
+  height: var(--cell-size);
+  width: var(--cell-size);
+  border: 1px solid black;
+  color: white;
+  font-size: var(--mark-size);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+.cell:first-child,
+.cell:nth-child(4),
+.cell:nth-child(7) {
+  border-left: none;
+}
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+  border-right: none;
+}
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none;
+}
+
+/* we're not using alphabets here that means not writing them in html instead we will use pure css ::after and ::before for X and O */
+.cell.x,
+.cell.o {
+  cursor: not-allowed;
+}
+/* ---------------X SETUP */
+.cell.x::before,
+.cell.x::after {
+  background-color: black;
+}
+.cell.o::before,
+.cell.o::after {
+  background-color: black;
+}
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  background-color: black;
+  width: calc(var(--cell-size) * 0.15);
+  height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+  transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+  transform: rotate(-45deg);
+}
+
+.board.x .cell:not(.x):not(.o):hover::before {
+  background-color: lightgray;
+}
+.board.x .cell:not(.x):not(.o):hover::after {
+  background-color: lightgray;
+}
+
+/* ---------------O SETUP */
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+  background-color: black;
+}
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+  width: calc((var(--mark-size)) * 0.7);
+  height: calc((var(--mark-size)) * 0.7);
+  background-color: white;
+}
+.board.o .cell:not(.x):not(.o):hover::before {
+  background-color: lightgrey;
+}
+
+/* Overlay */
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 4rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  display: none;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  color: white;
+}
+/* Player setup */
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.player h1 {
+  font-weight: 900;
+}
+.player div {
+  font-size: 2rem;
+}
+.player-1 {
+  height: 100%;
+  width: 25%;
+  background-color: #5c8374;
+  /* color: white; */
+  position: relative;
+}
+.player-1::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--after1, rgba(255, 255, 255, 0.5));
+}
+.player-2 {
+  height: 100%;
+  width: 25%;
+  background-color: #5c8374;
+  position: relative;
+}
+.player-2::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--after2, none);
+}
+
+.current {
+  height: var(--cell-size);
+  width: var(--cell-size);
+  /* border: 1px solid black; */
+  /* color: white; */
+  font-size: var(--mark-size);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.current.x::after,
+.current.x::before {
+  content: "";
+  background-color: black;
+  position: absolute;
+  width: calc(var(--cell-size) * 0.15);
+  height: var(--mark-size);
+}
+.current.x::before {
+  transform: rotate(45deg);
+}
+.current.x::after {
+  transform: rotate(-45deg);
+}
+
+.current.o::before,
+.current.o::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.current.o::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+  background-color: black;
+}
+.current.o::after {
+  width: calc((var(--mark-size)) * 0.7);
+  height: calc((var(--mark-size)) * 0.7);
+  background-color: #5c8374;
+}
+
+.next {
+  padding: 10px 30px;
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --cell-size: 90px;
+    --mark-size: calc(var(--cell-size) * 0.9);
+  }
+  .landing-page h1 {
+    font-size: 2rem;
+    line-height: 2;
+    text-align: center;
+  }
+  .landing-page h3 {
+    font-size: 15px;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .board {
+    width: 100%;
+    height: 50%;
+  }
+  .player {
+    width: 100%;
+    height: 25%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .player h1 {
+    font-size: 1.9rem;
+  }
+  .player div {
+    font-size: 1rem;
+  }
+  .current-won {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+  }
+  .current-draw {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+  }
+  .current {
+    height: 60px;
+    width: 60px;
+  }
+  .current.x::after,
+  .current.x::before {
+    content: "";
+    background-color: black;
+    position: absolute;
+    width: calc(60px * 0.15);
+    height: 60px;
+  }
+  .current.o::before {
+    width: 60px;
+    height: 60px;
+    background-color: black;
+  }
+  .current.o::after {
+    width: calc(60px * 0.7);
+    height: calc(60px * 0.7);
+    background-color: #5c8374;
+  }
+  .overlay {
+    font-size: 2.5rem;
+  }
+  .overlay-text {
+    text-align: center;
+  }
+}
